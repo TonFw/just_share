@@ -1,6 +1,5 @@
 # Libs/Gems or Ruby classes for it GEM
 require 'json'
-require 'curl'
 require 'rest_client'
 
 # Gem files
