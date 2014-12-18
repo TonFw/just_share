@@ -1,0 +1,2 @@
+class JustShare::Delicious
+end

@@ -1,0 +1,2 @@
+class JustShare::Facebook
+end
