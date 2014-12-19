@@ -3,7 +3,7 @@ require 'json'
 require 'rest_client'
 
 # Gem files
-[:version, :delicious, :facebook, :google_plus, :pinterest, :tumblr, :twitter].each { |lib| require "just_share/#{lib}" }
+[:version, :string, :social_linker, :delicious, :facebook, :google_plus, :pinterest, :tumblr, :twitter].each { |lib| require "just_share/#{lib}" }
 
 # Module to have "global accessible vars to it gem scope"
 module JustShare
@@ -25,7 +25,7 @@ module JustShare
     params[:image_url] = @image_url unless params[:image_url].nil?
 
     # Dynamic instantiate the social network & get it generated link
-    social_network = "Socials::#{params[:social].humanize}".constantize.new(params.except[:social])
+    social_network = "Socials::#{params[:social].to_s.capitalize_humanized}".constantize.new(params.except[:social])
     social_network.get_post_link
   end
 
