@@ -6,12 +6,16 @@ class JustShare::SocialLinker
   attr_accessor :link # The redirect link on the post
   attr_accessor :via # The app which post like: PageRenter
 
-  # It constructor must be reused by it childs
+  # It constructor must be reused by it children
   def initialize(params={})
     # SetUp the attrs
     self.via=params[:via]
     self.link=params[:link]
     self.domain=params[:domain]
     self.message=params[:message]
+  end
+
+  # Method to be implemented on it children!
+  def get_post_link
   end
 end
