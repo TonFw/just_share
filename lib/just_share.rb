@@ -11,15 +11,18 @@ module JustShare
   @via
   @link
   @domain
+  @title
   @message
+  @image_url
 
   # Facade method to create the links
   def self.on(params={})
     # SetUp the params if those attrs are empty
     params[:via] = @via unless params[:via].nil?
     params[:link] = @link unless params[:link].nil?
-    params[:domain] = @domain unless params[:domain].nil?
+    params[:title] = @title unless params[:title].nil?
     params[:message] = @message unless params[:message].nil?
+    params[:image_url] = @image_url unless params[:image_url].nil?
 
     # Dynamic instantiate the social network & get it generated link
     social_network = "Socials::#{params[:social].humanize}".constantize.new(params.except[:social])
@@ -41,5 +44,13 @@ module JustShare
 
   def self.message(message)
     @message=message
+  end
+
+  def self.title(title)
+    @title=title
+  end
+
+  def self.image_url(image_url)
+    @image_url=image_url
   end
 end
