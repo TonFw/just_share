@@ -1,2 +1,2 @@
-class JustShare::GooglePlus
+class JustShare::GooglePlus < JustShare::SocialLinker
 end
