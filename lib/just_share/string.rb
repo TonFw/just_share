@@ -17,6 +17,11 @@ class String
     it_new_format
   end
 
+  # Helpful for the RSpec test
+  def equals? str
+    self == str
+  end
+
   # Rails Constantize (but renamed to not have conflicts)
   def to_constant
     camel_cased_word = self
