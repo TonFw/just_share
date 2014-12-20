@@ -39,6 +39,7 @@ class String
       else
         candidate = constant.const_get(name)
         next candidate if constant.const_defined?(name, false)
+=begin TODO UNCOMMENT IF ANYTHING CRASH
         next candidate unless Object.const_defined?(name)
 
         # Go down the ancestors to check it it's owned
@@ -51,6 +52,7 @@ class String
 
         # owner is in Object, so raise
         constant.const_get(name, false)
+=end
       end
     end
   end
