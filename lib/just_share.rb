@@ -46,7 +46,9 @@ module JustShare
   end
 
   def self.hash_tags=(hash_tags)
-    @hash_tags=hash_tags
+    @hash_tags = hash_tags if hash_tags.is_a?Array
+    @hash_tags = [] if @hash_tags.nil?
+    @hash_tags.append(hash_tags) unless hash_tags.is_a?Array
   end
 
   def self.via
