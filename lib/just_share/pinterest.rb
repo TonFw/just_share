@@ -1,2 +1,2 @@
-class JustShare::Pinterest
+class JustShare::Pinterest < JustShare::SocialLinker
 end
