@@ -1,2 +1,2 @@
-class JustShare::Tumblr
+class JustShare::Tumblr < JustShare::SocialLinker
 end
