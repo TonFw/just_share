@@ -10,22 +10,17 @@ module JustShare
   # Attrs to ConfigThe Module & reuse those attrs
   @via
   @link
-  @domain
-  @title
   @message
-  @image_url
 
   # Facade method to create the links
   def self.on(params={})
     # SetUp the params if those attrs are empty
-    params[:via] = @via unless params[:via].nil?
-    params[:link] = @link unless params[:link].nil?
-    params[:title] = @title unless params[:title].nil?
-    params[:message] = @message unless params[:message].nil?
-    params[:image_url] = @image_url unless params[:image_url].nil?
+    @via = params[:via]  unless params[:via].nil?
+    @link = params[:link] unless params[:link].nil?
+    @message = params[:message]  unless params[:message].nil?
 
     # Dynamic instantiate the social network & get it generated link
-    social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new social_post_hash
+    social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
     social_network.get_post_link
   end
 
@@ -38,43 +33,19 @@ module JustShare
     @link=link
   end
 
-  def self.domain=(domain)
-    @domain=domain
-  end
-
   def self.message=(message)
     @message=message
-  end
-
-  def self.title=(title)
-    @title=title
-  end
-
-  def self.image_url=(image_url)
-    @image_url=image_url
   end
 
   def self.via
     @via
   end
 
-  def self.link
+  def self.link_url
     @link
   end
-
-  def self.domain
-    @domain
-  end
-
+  
   def self.message
     @message
-  end
-
-  def self.title
-    @title
-  end
-
-  def self.image_url
-    @image_url
   end
 end
