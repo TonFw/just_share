@@ -11,6 +11,7 @@ module JustShare
   @via
   @link
   @message
+  @hash_tags
 
   # Facade method to create the links
   def self.on(params={})
@@ -22,6 +23,13 @@ module JustShare
     # Dynamic instantiate the social network & get it generated link
     social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
     social_network.get_post_link
+  end
+
+  # Convert it array to a simple String to be a GET HTTP param
+  def array_to_str_params input_array
+    return_str = '' # init
+    input_array.each { |item| return_str="#{return_str}#{item}," }
+    return_str # return
   end
 
   # Static methods to set the Attrs (it means not necessary those attrs in the 'on' method)
@@ -37,6 +45,10 @@ module JustShare
     @message=message
   end
 
+  def self.hash_tags=(hash_tags)
+    @hash_tags=hash_tags
+  end
+
   def self.via
     @via
   end
@@ -47,5 +59,9 @@ module JustShare
   
   def self.message
     @message
+  end
+
+  def self.hash_tags
+    @hash_tags.nil? ? @hash_tags=[] : @hash_tags
   end
 end
