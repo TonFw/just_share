@@ -18,6 +18,7 @@ describe JustShare do
       @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{link}"
       @twitter_expected_url = "https://twitter.com/intent/tweet?text=#{message}&url=#{link}&via=#{via}&hashtags=#{JustShare.array_to_str_params(hash_tags)}"
       @google_plus_expected_url = "https://plus.google.com/share?url=#{link}"
+      @pinterest_expected_url = "http://pinterest.com/pin/create/bookmarklet?url=#{link}&description=#{message}&media=#{url_image}"
     end
 
     # SetUp for each tests
@@ -52,6 +53,10 @@ describe JustShare do
     end
 
     it "Pinterest" do
+      @base_hash[:social] = :pinterest
+      @url_generated = JustShare.on(@base_hash)
+      expect(@url_generated).to be_equals @pinterest_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
     end
 
     it "Tumblr" do
