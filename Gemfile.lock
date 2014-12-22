@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    just_share (0.0.1)
+    just_share (1.0.0)
       colorize (~> 0.7.3, >= 0.7.3)
       multi_json (~> 1.10, >= 1.10.1)
       rest-client (~> 1.7, >= 1.7.2)
