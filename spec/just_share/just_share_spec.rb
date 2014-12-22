@@ -21,6 +21,7 @@ describe JustShare do
       @google_plus_expected_url = "https://plus.google.com/share?url=#{link}"
       @pinterest_expected_url = "http://pinterest.com/pin/create/bookmarklet?url=#{link}&description=#{message}&media=#{url_image}"
       @tumblr_expected_url = "https://www.tumblr.com/share?u=#{link}&t=#{message}"
+      @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{link}&n=#{message}"
     end
 
     # SetUp for each tests
@@ -65,6 +66,13 @@ describe JustShare do
       @base_hash[:social] = :tumblr
       @url_generated = JustShare.on(@base_hash)
       expect(@url_generated).to be_equals @tumblr_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
+    end
+
+    it "Blogger" do
+      @base_hash[:social] = :blogger
+      @url_generated = JustShare.on(@base_hash)
+      expect(@url_generated).to be_equals @blogger_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
   end
