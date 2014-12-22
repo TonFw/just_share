@@ -4,7 +4,7 @@ class JustShare::Twitter < JustShare::SocialLinker
     self.domain='https://twitter.com'
     self.path='intent/tweet'
 
-    # Params (only the link is working, the others are deprecated for the sharer.php & won't work)
+    # Params (for twitter it is possible set more params on URL, but to more style check it tags documentation)
     via_param = "via=#{self.via}" # IMPORTANT: be the App? Like PageRenter?
     url_param = "url=#{self.link}"
     text_param = "text=#{self.message}"
