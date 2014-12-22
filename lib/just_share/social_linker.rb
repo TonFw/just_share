@@ -4,6 +4,7 @@ class JustShare::SocialLinker
   attr_accessor :message # Base Message (like from the Ad.social_message)
   attr_accessor :link # The redirect link on the post
   attr_accessor :via # The app which post like: PageRenter
+  attr_accessor :hash_tags # Array of HashTags, like nature, sunset, HereWeGo...
 
   # Attrs filled on children
   attr_accessor :domain # ex: facebook.com twitter.com ...
@@ -16,6 +17,7 @@ class JustShare::SocialLinker
     self.via=params[:via] || self.via=JustShare.via
     self.link=params[:link] || self.link=JustShare.link
     self.message=params[:message] || self.message=JustShare.message
+    self.hash_tags=params[:hash_tags] || self.hash_tags=JustShare.hash_tags
   end
 
   # FacadeMethod
