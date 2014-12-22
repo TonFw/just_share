@@ -15,6 +15,7 @@ describe JustShare do
       @base_hash = {via:via, link:link, message:message, hash_tags:hash_tags, image_url:url_image}
       
       # Expected URLs generated:
+      link = CGI::escape(link)
       @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{link}"
       @twitter_expected_url = "https://twitter.com/intent/tweet?text=#{message}&url=#{link}&via=#{via}&hashtags=#{JustShare.array_to_str_params(hash_tags)}"
       @google_plus_expected_url = "https://plus.google.com/share?url=#{link}"

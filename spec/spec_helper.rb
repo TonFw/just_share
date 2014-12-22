@@ -1,6 +1,7 @@
 require 'bundler/setup'
 require 'rest_client'
 require './spec/helpers'
+require 'cgi'
 
 Bundler.setup
 
