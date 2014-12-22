@@ -19,6 +19,7 @@ module JustShare
     @via = params[:via]  unless params[:via].nil?
     @link = params[:link] unless params[:link].nil?
     @message = params[:message]  unless params[:message].nil?
+    @hash_tags = params[:hash_tags] unless params[:hash_tags].nil?
 
     # Dynamic instantiate the social network & get it generated link
     social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
@@ -26,7 +27,7 @@ module JustShare
   end
 
   # Convert it array to a simple String to be a GET HTTP param
-  def array_to_str_params input_array
+  def self.array_to_str_params input_array
     return_str = '' # init
     input_array.each { |item| return_str="#{return_str}#{item}," }
     return_str # return
