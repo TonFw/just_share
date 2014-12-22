@@ -9,9 +9,10 @@ describe JustShare do
       link = 'http://google.com'
       message = 'Partiu compartilhar!'
       hash_tags = ['partiu','partiu2']
+      url_image = 'https://avatars3.githubusercontent.com/u/7591935'
 
       # Global useful vars
-      @base_hash = {via:via, link:link, message:message, hash_tags:hash_tags}
+      @base_hash = {via:via, link:link, message:message, hash_tags:hash_tags, image_url:url_image}
       
       # Expected URLs generated:
       @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{link}"
