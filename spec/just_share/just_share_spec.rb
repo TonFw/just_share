@@ -4,24 +4,23 @@ describe JustShare do
   describe 'Links write spelled & accessible' do
     # SetUp for all tests
     before(:all) do
-      # TODO REFACTOR THE COUNTER, IT IS BEING RESETED
-      via = 'PageRenter'
-      link = 'http://google.com'
-      message = 'Partiu compartilhar!'
-      hash_tags = ['partiu','partiu2']
-      url_image = 'https://avatars3.githubusercontent.com/u/7591935'
+      @via = 'PageRenter'
+      @link = 'http://google.com'
+      @message = 'Partiu compartilhar!'
+      @hash_tags = ['partiu','partiu2']
+      @url_image = 'https://avatars3.githubusercontent.com/u/7591935'
 
       # Global useful vars
-      @base_hash = {via:via, link:link, message:message, hash_tags:hash_tags, image_url:url_image}
+      @base_hash = {via:@via, link:@link, message:@message, hash_tags:@hash_tags, image_url:@url_image}
       
       # Expected URLs generated:
-      link = CGI::escape(link)
-      @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{link}"
-      @twitter_expected_url = "https://twitter.com/intent/tweet?text=#{message}&url=#{link}&via=#{via}&hashtags=#{JustShare.array_to_str_params(hash_tags)}"
-      @google_plus_expected_url = "https://plus.google.com/share?url=#{link}"
-      @pinterest_expected_url = "http://pinterest.com/pin/create/bookmarklet?url=#{link}&description=#{message}&media=#{url_image}"
-      @tumblr_expected_url = "https://www.tumblr.com/share?u=#{link}&t=#{message}"
-      @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{link}&n=#{message}"
+      @link = CGI::escape(@link)
+      @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{@link}"
+      @twitter_expected_url = "https://twitter.com/intent/tweet?text=#{@message}&url=#{@link}&via=#{@via}&hashtags=#{JustShare.array_to_str_params(@hash_tags)}"
+      @google_plus_expected_url = "https://plus.google.com/share?url=#{@link}"
+      @pinterest_expected_url = "http://pinterest.com/pin/create/bookmarklet?url=#{@link}&description=#{@message}&media=#{@url_image}"
+      @tumblr_expected_url = "https://www.tumblr.com/share?u=#{@link}&t=#{@message}"
+      @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{@link}&n=#{@message}"
     end
 
     # SetUp for each tests
@@ -34,7 +33,17 @@ describe JustShare do
       #@url_generated = JustShare.on(@base_hash)
     end
 
-    it "Facebook link should be okay & accessible" do
+    it "Global config" do
+      JustShare.via=@via
+      JustShare.link=CGI::unescape(@link)
+      JustShare.message=@message
+      JustShare.hash_tags=@hash_tags
+
+      @url_generated = JustShare.on({social: :facebook})
+      expect(@url_generated).to be_equals @facebook_expected_url
+    end
+
+    it "Facebook" do
       @base_hash[:social] = :facebook
       @url_generated = JustShare.on(@base_hash)
       expect(@url_generated).to be_equals @facebook_expected_url

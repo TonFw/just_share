@@ -58,12 +58,16 @@ module JustShare
     @via
   end
 
-  def self.link_url
+  def self.link
     @link
   end
   
   def self.message
     @message
+  end
+
+  def self.image_url
+    @image_url
   end
 
   def self.hash_tags

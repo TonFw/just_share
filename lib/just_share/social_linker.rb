@@ -34,7 +34,7 @@ class JustShare::SocialLinker
 
   # Overwriting the link getter to return it encoded as HTTP uses
   def link
-    CGI::escape(self.aux_link)
+    CGI::escape(self.aux_link) unless self.aux_link.nil?
   end
 
   # Method to be implemented on it children!
