@@ -23,6 +23,7 @@ describe JustShare do
       @tumblr_expected_url = "https://www.tumblr.com/share?u=#{@link}&t=#{@message}"
       @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{@link}&n=#{@message}"
       @linked_in_expected_url = "https://www.linkedin.com/shareArticle?mini=true&url=#{@link}&title=#{@title}&summary=#{@message}&source=#{@url_image}"
+      @delicious_expected_url = "https://delicious.com/save?mini=true&url=#{@link}&title=#{@title}&tags=#{JustShare.array_to_str_params(@hash_tags)}&note=#{@message}"
     end
 
     # SetUp for each tests
@@ -38,6 +39,7 @@ describe JustShare do
     it "Global config" do
       JustShare.via=@via
       JustShare.link=CGI::unescape(@link)
+      JustShare.title=@title
       JustShare.message=@message
       JustShare.hash_tags=@hash_tags
 
@@ -98,6 +100,14 @@ describe JustShare do
       @url_generated = JustShare.on(@base_hash)
       puts @url_generated
       expect(@url_generated).to be_equals @blogger_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
+    end
+
+    it "Delicious" do
+      @base_hash[:social] = :delicious
+      @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
+      expect(@url_generated).to be_equals @delicious_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
   end
