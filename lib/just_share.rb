@@ -3,7 +3,12 @@ require 'json'
 require 'rest_client'
 
 # Gem files
-[:version, :string, :social_linker, :blogger, :delicious, :facebook, :google_plus, :linked_in, :pinterest, :tumblr, :twitter].each { |lib| require "just_share/#{lib}" }
+files = [
+    :version, :string, :social_linker, :blogger,
+    :facebook, :google_plus, :linked_in, :pinterest,
+    :twitter, :delicious, :tumblr
+]
+files.each { |lib| require "just_share/#{lib}" }
 
 # Module to have "global accessible vars to it gem scope"
 module JustShare
