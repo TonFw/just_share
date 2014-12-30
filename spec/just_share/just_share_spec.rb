@@ -5,7 +5,7 @@ describe JustShare do
     # SetUp for all tests
     before(:all) do
       @via = 'PageRenter'
-      @link = 'http://google.com'
+      @link = 'http://goo.gl'
       @title = 'Titulado aqui oh!'
       @message = 'Partiu compartilhar!'
       @hash_tags = ['partiu','partiu2']
