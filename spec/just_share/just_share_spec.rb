@@ -6,12 +6,13 @@ describe JustShare do
     before(:all) do
       @via = 'PageRenter'
       @link = 'http://google.com'
+      @title = 'Titulado aqui oh!'
       @message = 'Partiu compartilhar!'
       @hash_tags = ['partiu','partiu2']
       @url_image = 'https://avatars3.githubusercontent.com/u/7591935'
 
       # Global useful vars
-      @base_hash = {via:@via, link:@link, message:@message, hash_tags:@hash_tags, image_url:@url_image}
+      @base_hash = {via:@via, link:@link, title:@title, message:@message, hash_tags:@hash_tags, image_url:@url_image}
       
       # Expected URLs generated:
       @link = CGI::escape(@link)
@@ -21,6 +22,7 @@ describe JustShare do
       @pinterest_expected_url = "http://pinterest.com/pin/create/bookmarklet?url=#{@link}&description=#{@message}&media=#{@url_image}"
       @tumblr_expected_url = "https://www.tumblr.com/share?u=#{@link}&t=#{@message}"
       @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{@link}&n=#{@message}"
+      @linked_in_expected_url = "https://www.linkedin.com/shareArticle?mini=true&url=#{@link}&title=#{@title}&summary=#{@message}&source=#{@url_image}"
     end
 
     # SetUp for each tests
@@ -46,6 +48,7 @@ describe JustShare do
     it "Facebook" do
       @base_hash[:social] = :facebook
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @facebook_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
@@ -53,6 +56,7 @@ describe JustShare do
     it "Twitter" do
       @base_hash[:social] = :twitter
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @twitter_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
@@ -60,13 +64,23 @@ describe JustShare do
     it "GooglePlus" do
       @base_hash[:social] = 'google-plus'
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @google_plus_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
+    end
+
+    it "LinkedIn" do
+      @base_hash[:social] = 'linked-in'
+      @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
+      expect(@url_generated).to be_equals @linked_in_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
 
     it "Pinterest" do
       @base_hash[:social] = :pinterest
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @pinterest_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
@@ -74,6 +88,7 @@ describe JustShare do
     it "Tumblr" do
       @base_hash[:social] = :tumblr
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @tumblr_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
@@ -81,6 +96,7 @@ describe JustShare do
     it "Blogger" do
       @base_hash[:social] = :blogger
       @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
       expect(@url_generated).to be_equals @blogger_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
     end
