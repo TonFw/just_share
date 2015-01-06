@@ -30,6 +30,8 @@ module JustShare
 
   # Convert it array to a simple String to be a GET HTTP param
   def self.array_to_str_params input_array
+    aux_array = input_array.split(',') if input_array.is_a?String
+    aux_array.is_a?String ? return input_array : input_array = aux_array
     return_str = '' # init
     input_array.each { |item| return_str="#{return_str}#{item}," }
     return_str # return
