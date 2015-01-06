@@ -22,6 +22,11 @@ class String
     self == str
   end
 
+  # Return it last char
+  def last
+    self[self.length-1]
+  end
+
   # Rails Constantize (but renamed to not have conflicts)
   def to_constant
     camel_cased_word = self

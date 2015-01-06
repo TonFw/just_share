@@ -54,6 +54,7 @@ describe JustShare do
       @base_hash[:social] = :twitter
       @url_generated = JustShare.on(@base_hash)
       expect(@url_generated).to be_equals @twitter_expected_url
+      expect(@url_generated.last).to_not be_equals ','
       #expect(accessible?(@url_generated)).to be_truthy
     end
 
