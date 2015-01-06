@@ -3,13 +3,19 @@ require 'json'
 require 'rest_client'
 
 # Gem files
-[:version, :string, :social_linker, :blogger, :delicious, :facebook, :google_plus, :pinterest, :tumblr, :twitter].each { |lib| require "just_share/#{lib}" }
+files = [
+    :version, :string, :social_linker, :blogger,
+    :facebook, :google_plus, :linked_in, :pinterest,
+    :twitter, :delicious, :tumblr
+]
+files.each { |lib| require "just_share/#{lib}" }
 
 # Module to have "global accessible vars to it gem scope"
 module JustShare
   # Attrs to ConfigThe Module & reuse those attrs
   @via
   @link
+  @title
   @message
   @hash_tags
   @image_url
@@ -47,6 +53,10 @@ module JustShare
     @link=link
   end
 
+  def self.title=(title)
+    @title=title
+  end
+
   def self.message=(message)
     @message=message
   end
@@ -64,7 +74,11 @@ module JustShare
   def self.link
     @link
   end
-  
+
+  def self.title
+    @title
+  end
+
   def self.message
     @message
   end
