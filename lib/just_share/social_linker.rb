@@ -24,6 +24,7 @@ class JustShare::SocialLinker
     self.message=params[:message] || self.message=JustShare.message
     self.hash_tags=params[:hash_tags] || self.hash_tags=JustShare.hash_tags
     self.image_url=params[:image_url] || self.hash_tags=JustShare.image_url
+    self.hash_tags = JustShare.hash_tags if self.hash_tags.nil? || params[:hash_tags].nil?
   end
 
   # FacadeMethod

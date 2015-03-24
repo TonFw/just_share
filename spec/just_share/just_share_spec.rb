@@ -11,11 +11,17 @@ describe JustShare do
       @hash_tags = ['partiu','partiu2']
       @url_image = 'https://avatars3.githubusercontent.com/u/7591935'
 
+      # Face invite
+      @inv_app_id = '128300630673976'
+      @inv_msg = 'Invite all your friends!'
+      @inv_redir_url = 'https://apps.facebook.com/proumoevents'
+
       # Global useful vars
       @base_hash = {via:@via, link:@link, title:@title, message:@message, hash_tags:@hash_tags, image_url:@url_image}
       
       # Expected URLs generated:
       @link = CGI::escape(@link)
+      @face_invite_expected_url = "https://www.facebook.com/dialog/apprequests?app_id=#{@inv_app_id}&message=#{@inv_msg}&redirect_uri=#{@inv_redir_url}"
       @facebook_expected_url = "https://www.facebook.com/sharer/sharer.php?u=#{@link}"
       @twitter_expected_url = "https://twitter.com/intent/tweet?text=#{@message}&url=#{@link}&via=#{@via}&hashtags=#{JustShare.array_to_str_params(@hash_tags)}"
       @google_plus_expected_url = "https://plus.google.com/share?url=#{@link}"
@@ -55,6 +61,13 @@ describe JustShare do
       #expect(accessible?(@url_generated)).to be_truthy
     end
 
+    it "Facebook invite friends" do
+      @url_generated = JustShare::Facebook.invite_friends(app_id=@inv_app_id, msg=@inv_msg, redir_url=@inv_redir_url)
+      puts @url_generated
+      expect(@url_generated).to be_equals @face_invite_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
+    end
+
     it "Twitter" do
       @base_hash[:social] = :twitter
       @url_generated = JustShare.on(@base_hash)
@@ -73,7 +86,7 @@ describe JustShare do
     end
 
     it "LinkedIn" do
-      @base_hash[:social] = 'linked-in'
+      @base_hash[:social] = 'linkedin'
       @url_generated = JustShare.on(@base_hash)
       puts @url_generated
       expect(@url_generated).to be_equals @linked_in_expected_url

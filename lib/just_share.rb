@@ -23,21 +23,31 @@ module JustShare
   # Facade method to create the links
   def self.on(params={})
     # SetUp the params if those attrs are empty
-    @via = params[:via]  unless params[:via].nil?
-    @link = params[:link] unless params[:link].nil?
-    @message = params[:message]  unless params[:message].nil?
-    @hash_tags = params[:hash_tags] unless params[:hash_tags].nil?
-    @image_url = params[:image_url] unless params[:image_url].nil?
+    @via = params[:via]  || JustShare.via
+    @link = params[:link] || JustShare.link
+    @message = params[:message] || JustShare.message
+    @hash_tags = params[:hash_tags] || JustShare.hash_tags
+    @image_url = params[:image_url] || JustShare.image_url
 
     # Dynamic instantiate the social network & get it generated link
-    social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
+    begin
+      social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
+    rescue Exception => e
+      if e.to_s.index('Linkedin').nil?
+        return ''
+      else
+        params[:social] = 'linked-in'
+      end
+
+      social_network = "JustShare::#{params[:social].to_s.capitalize_humanized}".to_constant.new params
+    end
+
     social_network.get_post_link
   end
 
   # Convert it array to a simple String to be a GET HTTP param
   def self.array_to_str_params input_array
-    aux_array = input_array.split(',') if input_array.is_a?String
-    if aux_array.is_a?String then return input_array elsif !aux_array.nil? then input_array = aux_array end
+    input_array = input_array.split(',') if input_array.is_a?String
     return_str = '' # init
     input_array.each { |item| return_str="#{return_str}#{item}," }
     return_str = return_str.chomp(',') if return_str.last == ','
