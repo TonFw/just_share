@@ -6,7 +6,7 @@ require 'rest_client'
 files = [
     :version, :string, :social_linker, :blogger,
     :facebook, :google_plus, :linked_in, :pinterest,
-    :twitter, :delicious, :tumblr
+    :twitter, :delicious, :tumblr, :reddit, :vk, :xing
 ]
 files.each { |lib| require "just_share/#{lib}" }
 

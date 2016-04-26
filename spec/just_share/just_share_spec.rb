@@ -32,9 +32,9 @@ describe JustShare do
       @delicious_expected_url = "https://delicious.com/save?mini=true&url=#{@link}&title=#{@title}&tags=#{JustShare.array_to_str_params(@hash_tags)}&note=#{@message}"
 
       # New expected URLs
-      @reddit_url = "http://www.reddit.com/submit?url=#{@link}"
-      @xing_url = "https://www.xing.com/spi/shares/new?url=#{@link}"
-      @vk_url = "http://vk.com/share.php?url=#{@link}"
+      @reddit_expected_url = "http://www.reddit.com/submit?url=#{@link}"
+      @xing_expected_url = "https://www.xing.com/spi/shares/new?url=#{@link}"
+      @vk_expected_url = "http://vk.com/share.php?url=#{@link}"
     end
 
     # SetUp for each tests
@@ -128,6 +128,28 @@ describe JustShare do
       puts @url_generated
       expect(@url_generated).to be_equals @delicious_expected_url
       #expect(accessible?(@url_generated)).to be_truthy
+    end
+
+    it "Reddit" do
+      @base_hash[:social] = :reddit
+      @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
+      expect(@url_generated).to be_equals @reddit_expected_url
+      #expect(accessible?(@url_generated)).to be_truthy
+    end
+
+    it "Vk" do
+      @base_hash[:social] = :vk
+      @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
+      expect(@url_generated).to be_equals @vk_expected_url
+    end
+
+    it "Xing" do
+      @base_hash[:social] = :xing
+      @url_generated = JustShare.on(@base_hash)
+      puts @url_generated
+      expect(@url_generated).to be_equals @xing_expected_url
     end
   end
 end
