@@ -30,6 +30,11 @@ describe JustShare do
       @blogger_expected_url = "https://www.blogger.com/blog_this.pyra?u=#{@link}&n=#{@message}"
       @linked_in_expected_url = "https://www.linkedin.com/shareArticle?mini=true&url=#{@link}&title=#{@title}&summary=#{@message}&source=#{@url_image}"
       @delicious_expected_url = "https://delicious.com/save?mini=true&url=#{@link}&title=#{@title}&tags=#{JustShare.array_to_str_params(@hash_tags)}&note=#{@message}"
+
+      # New expected URLs
+      @reddit_url = "http://www.reddit.com/submit?url=#{@link}"
+      @xing_url = "https://www.xing.com/spi/shares/new?url=#{@link}"
+      @vk_url = "http://vk.com/share.php?url=#{@link}"
     end
 
     # SetUp for each tests

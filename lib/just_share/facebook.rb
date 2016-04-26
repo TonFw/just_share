@@ -11,7 +11,7 @@ class JustShare::Facebook < JustShare::SocialLinker
     self.params = "#{url_param}"
   end
 
-  def self.invite_friends app_id, msg, redir_url
+  def self.invite_friends(app_id, msg, redir_url)
     # Base URL
     domain='https://www.facebook.com'
     path='dialog/apprequests'
